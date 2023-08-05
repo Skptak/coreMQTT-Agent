@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone This Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: recursive
       - name: Build
@@ -42,7 +42,7 @@ jobs:
   complexity:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Check complexity
         uses: FreeRTOS/CI-CD-Github-Actions/complexity@main
         with:
@@ -50,7 +50,7 @@ jobs:
   doxygen:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Download MQTT tag
         run: |
           # We don't need to generate the coreMQTT docs, we only need the tag file. We can just download it.
@@ -65,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone This Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Run spellings check
         uses: FreeRTOS/CI-CD-Github-Actions/rust-spell-check@main
         with:
@@ -73,7 +73,7 @@ jobs:
   formatting:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Check formatting
         uses: FreeRTOS/CI-CD-Github-Actions/formatting@main
         with:
@@ -81,9 +81,9 @@ jobs:
   git-secrets:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Checkout awslabs/git-secrets
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: awslabs/git-secrets
           ref: master
@@ -97,7 +97,7 @@ jobs:
   memory_statistics:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
             submodules: 'recursive'
       - name: Measure sizes
@@ -106,6 +106,7 @@ jobs:
             config: .github/memory_statistics_config.json
             check_against: docs/doxygen/include/size_table.md
   proof_ci:
+    if: ${{ github.event.pull_request }}
     runs-on: cbmc_ubuntu-latest_16-core
     steps:
       - name: Set up CBMC runner
