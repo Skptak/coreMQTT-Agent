@@ -2,22 +2,23 @@
  * coreMQTT Agent v1.2.0
  * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
- * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
- * the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
- * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
- * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
- * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 /**
@@ -28,9 +29,8 @@
 #define CORE_MQTT_CONFIG_H_
 
 /* Mock a network context for the CBMC proofs. */
-struct NetworkContext
-{
-    int NetworkContext;
+struct NetworkContext {
+  int NetworkContext;
 };
 
 /**
@@ -48,7 +48,7 @@ struct NetworkContext
  * @note This definition must exist in order to compile. 10U is a typical value
  * used in the MQTT demos.
  */
-#define MQTT_STATE_ARRAY_MAX_COUNT              ( 10U )
+#define MQTT_STATE_ARRAY_MAX_COUNT (10U)
 
 /**
  * @brief Retry count for reading CONNACK from network.
@@ -59,7 +59,7 @@ struct NetworkContext
  * times before timing out. A value of 0 for this config will cause the
  * transport receive for CONNACK  to be invoked only once.
  */
-#define MQTT_MAX_CONNACK_RECEIVE_RETRY_COUNT    ( 2U )
+#define MQTT_MAX_CONNACK_RECEIVE_RETRY_COUNT (2U)
 
 /**
  * @brief Number of milliseconds to wait for a ping response to a ping
@@ -68,7 +68,7 @@ struct NetworkContext
  * If a ping response is not received before this timeout, then
  * #MQTT_ProcessLoop will return #MQTTKeepAliveTimeout.
  */
-#define MQTT_PINGRESP_TIMEOUT_MS                ( 500U )
+#define MQTT_PINGRESP_TIMEOUT_MS (500U)
 
 /**
  * @brief The maximum duration of receiving no data over network when
@@ -86,6 +86,6 @@ struct NetworkContext
  * receive stub. There is no added value, in proving memory safety, to repeat
  * the logic that checks if the polling timeout is reached.
  */
-#define MQTT_RECV_POLLING_TIMEOUT_MS            ( 1U )
+#define MQTT_RECV_POLLING_TIMEOUT_MS (1U)
 
 #endif /* ifndef CORE_MQTT_CONFIG_H_ */

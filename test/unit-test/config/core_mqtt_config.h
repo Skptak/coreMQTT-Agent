@@ -2,22 +2,23 @@
  * coreMQTT Agent v1.2.0
  * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
- * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
- * the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
- * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
- * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
- * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 /**
@@ -49,7 +50,7 @@
  * be defined.
  */
 #ifdef DOXYGEN
-    #define MQTT_DO_NOT_USE_CUSTOM_CONFIG
+#define MQTT_DO_NOT_USE_CUSTOM_CONFIG
 #endif
 
 /**
@@ -72,8 +73,7 @@
  * <b>Default value:</b> `10`
  */
 /* Default value for the maximum acknowledgment pending PUBLISH messages. */
-#define MQTT_STATE_ARRAY_MAX_COUNT    ( 10U )
-
+#define MQTT_STATE_ARRAY_MAX_COUNT (10U)
 
 /**
  * @brief The number of retries for receiving CONNACK.
@@ -89,8 +89,7 @@
  */
 
 /* Default value for the CONNACK receive retries. */
-#define MQTT_MAX_CONNACK_RECEIVE_RETRY_COUNT    ( 5U )
-
+#define MQTT_MAX_CONNACK_RECEIVE_RETRY_COUNT (5U)
 
 /**
  * @brief Number of milliseconds to wait for a ping response to a ping
@@ -99,18 +98,17 @@
  * If a ping response is not received before this timeout, then
  * #MQTT_ProcessLoop will return #MQTTKeepAliveTimeout.
  *
- * @note If a dummy implementation of the #MQTTGetCurrentTimeFunc_t timer function,
- * is supplied to the library, then the keep-alive mechanism is not supported by the
- * #MQTT_ProcessLoop API function. In that case, the value of #MQTT_PINGRESP_TIMEOUT_MS
- * is irrelevant to the behavior of the library.
+ * @note If a dummy implementation of the #MQTTGetCurrentTimeFunc_t timer
+ * function, is supplied to the library, then the keep-alive mechanism is not
+ * supported by the #MQTT_ProcessLoop API function. In that case, the value of
+ * #MQTT_PINGRESP_TIMEOUT_MS is irrelevant to the behavior of the library.
  *
  * <b>Possible values:</b> Any positive integer up to SIZE_MAX. <br>
  * <b>Default value:</b> `500`
  */
 
 /* Wait 0.5 seconds by default for a ping response. */
-#define MQTT_PINGRESP_TIMEOUT_MS    ( 500U )
-
+#define MQTT_PINGRESP_TIMEOUT_MS (500U)
 
 /**
  * @brief The maximum duration between non-empty network reads while
@@ -119,22 +117,23 @@
  *
  * When an incoming MQTT packet is detected, the transport receive function
  * may be called multiple times until all of the expected number of bytes of the
- * packet are received. This timeout represents the maximum polling duration that
- * is allowed without any data reception from the network for the incoming packet.
+ * packet are received. This timeout represents the maximum polling duration
+ * that is allowed without any data reception from the network for the incoming
+ * packet.
  *
  * If the timeout expires, the #MQTT_ProcessLoop and #MQTT_ReceiveLoop functions
  * return #MQTTRecvFailed.
  *
- * @note If a dummy implementation of the #MQTTGetCurrentTimeFunc_t timer function,
- * is supplied to the library, then #MQTT_RECV_POLLING_TIMEOUT_MS MUST be set to 0.
+ * @note If a dummy implementation of the #MQTTGetCurrentTimeFunc_t timer
+ * function, is supplied to the library, then #MQTT_RECV_POLLING_TIMEOUT_MS MUST
+ * be set to 0.
  *
  * <b>Possible values:</b> Any positive 32 bit integer. Recommended to use a
  * small timeout value. <br>
  * <b>Default value:</b> `10`
  *
  */
-#define MQTT_RECV_POLLING_TIMEOUT_MS    ( 10U )
-
+#define MQTT_RECV_POLLING_TIMEOUT_MS (10U)
 
 /**
  * @brief The maximum duration allowed to send an MQTT packet over the transport
@@ -148,90 +147,95 @@
  * If the timeout expires, #MQTTSendFailed will be returned by the public API
  * functions.
  *
- * @note If a dummy implementation of the #MQTTGetCurrentTimeFunc_t timer function,
- * is supplied to the library, then #MQTT_SEND_TIMEOUT_MS MUST be set to 0.
+ * @note If a dummy implementation of the #MQTTGetCurrentTimeFunc_t timer
+ * function, is supplied to the library, then #MQTT_SEND_TIMEOUT_MS MUST be set
+ * to 0.
  *
  * <b>Possible values:</b> Any positive 32 bit integer. <br>
  * <b>Default value:</b> `20000`
  *
  */
-#define MQTT_SEND_TIMEOUT_MS    ( 10U )
-
+#define MQTT_SEND_TIMEOUT_MS (10U)
 
 /**
  * @brief Macro that is called in the MQTT library for logging "Error" level
  * messages.
  *
- * To enable error level logging in the MQTT library, this macro should be mapped to the
- * application-specific logging implementation that supports error logging.
+ * To enable error level logging in the MQTT library, this macro should be
+ * mapped to the application-specific logging implementation that supports error
+ * logging.
  *
- * @note This logging macro is called in the MQTT library with parameters wrapped in
- * double parentheses to be ISO C89/C90 standard compliant. For a reference
- * POSIX implementation of the logging macros, refer to core_mqtt_config.h files, and the
- * logging-stack in demos folder of the
- * [AWS IoT Embedded C SDK repository](https://github.com/aws/aws-iot-device-sdk-embedded-C).
+ * @note This logging macro is called in the MQTT library with parameters
+ * wrapped in double parentheses to be ISO C89/C90 standard compliant. For a
+ * reference POSIX implementation of the logging macros, refer to
+ * core_mqtt_config.h files, and the logging-stack in demos folder of the [AWS
+ * IoT Embedded C SDK
+ * repository](https://github.com/aws/aws-iot-device-sdk-embedded-C).
  *
- * <b>Default value</b>: Error logging is turned off, and no code is generated for calls
- * to the macro in the MQTT library on compilation.
+ * <b>Default value</b>: Error logging is turned off, and no code is generated
+ * for calls to the macro in the MQTT library on compilation.
  */
-#define LogError( message )
-
+#define LogError(message)
 
 /**
  * @brief Macro that is called in the MQTT library for logging "Warning" level
  * messages.
  *
- * To enable warning level logging in the MQTT library, this macro should be mapped to the
- * application-specific logging implementation that supports warning logging.
+ * To enable warning level logging in the MQTT library, this macro should be
+ * mapped to the application-specific logging implementation that supports
+ * warning logging.
  *
- * @note This logging macro is called in the MQTT library with parameters wrapped in
- * double parentheses to be ISO C89/C90 standard compliant. For a reference
- * POSIX implementation of the logging macros, refer to core_mqtt_config.h files, and the
- * logging-stack in demos folder of the
- * [AWS IoT Embedded C SDK repository](https://github.com/aws/aws-iot-device-sdk-embedded-C/).
+ * @note This logging macro is called in the MQTT library with parameters
+ * wrapped in double parentheses to be ISO C89/C90 standard compliant. For a
+ * reference POSIX implementation of the logging macros, refer to
+ * core_mqtt_config.h files, and the logging-stack in demos folder of the [AWS
+ * IoT Embedded C SDK
+ * repository](https://github.com/aws/aws-iot-device-sdk-embedded-C/).
  *
- * <b>Default value</b>: Warning logs are turned off, and no code is generated for calls
- * to the macro in the MQTT library on compilation.
+ * <b>Default value</b>: Warning logs are turned off, and no code is generated
+ * for calls to the macro in the MQTT library on compilation.
  */
-#define LogWarn( message )
-
+#define LogWarn(message)
 
 /**
  * @brief Macro that is called in the MQTT library for logging "Info" level
  * messages.
  *
- * To enable info level logging in the MQTT library, this macro should be mapped to the
- * application-specific logging implementation that supports info logging.
+ * To enable info level logging in the MQTT library, this macro should be mapped
+ * to the application-specific logging implementation that supports info
+ * logging.
  *
- * @note This logging macro is called in the MQTT library with parameters wrapped in
- * double parentheses to be ISO C89/C90 standard compliant. For a reference
- * POSIX implementation of the logging macros, refer to core_mqtt_config.h files, and the
- * logging-stack in demos folder of the
- * [AWS IoT Embedded C SDK repository](https://github.com/aws/aws-iot-device-sdk-embedded-C/).
+ * @note This logging macro is called in the MQTT library with parameters
+ * wrapped in double parentheses to be ISO C89/C90 standard compliant. For a
+ * reference POSIX implementation of the logging macros, refer to
+ * core_mqtt_config.h files, and the logging-stack in demos folder of the [AWS
+ * IoT Embedded C SDK
+ * repository](https://github.com/aws/aws-iot-device-sdk-embedded-C/).
  *
- * <b>Default value</b>: Info logging is turned off, and no code is generated for calls
- * to the macro in the MQTT library on compilation.
+ * <b>Default value</b>: Info logging is turned off, and no code is generated
+ * for calls to the macro in the MQTT library on compilation.
  */
-#define LogInfo( message )
+#define LogInfo(message)
 
 /**
  * @brief Macro that is called in the MQTT library for logging "Debug" level
  * messages.
  *
- * To enable debug level logging from MQTT library, this macro should be mapped to the
- * application-specific logging implementation that supports debug logging.
+ * To enable debug level logging from MQTT library, this macro should be mapped
+ * to the application-specific logging implementation that supports debug
+ * logging.
  *
- * @note This logging macro is called in the MQTT library with parameters wrapped in
- * double parentheses to be ISO C89/C90 standard compliant. For a reference
- * POSIX implementation of the logging macros, refer to core_mqtt_config.h files, and the
- * logging-stack in demos folder of the
- * [AWS IoT Embedded C SDK repository](https://github.com/aws/aws-iot-device-sdk-embedded-C/).
+ * @note This logging macro is called in the MQTT library with parameters
+ * wrapped in double parentheses to be ISO C89/C90 standard compliant. For a
+ * reference POSIX implementation of the logging macros, refer to
+ * core_mqtt_config.h files, and the logging-stack in demos folder of the [AWS
+ * IoT Embedded C SDK
+ * repository](https://github.com/aws/aws-iot-device-sdk-embedded-C/).
  *
- * <b>Default value</b>: Debug logging is turned off, and no code is generated for calls
- * to the macro in the MQTT library on compilation.
+ * <b>Default value</b>: Debug logging is turned off, and no code is generated
+ * for calls to the macro in the MQTT library on compilation.
  */
 
-#define LogDebug( message )
-
+#define LogDebug(message)
 
 #endif /* ifndef CORE_MQTT_CONFIG_DEFAULTS_H_ */

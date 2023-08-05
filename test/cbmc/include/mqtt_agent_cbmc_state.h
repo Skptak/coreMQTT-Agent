@@ -2,27 +2,29 @@
  * coreMQTT Agent v1.2.0
  * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
- * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
- * the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
- * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
- * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
- * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 /**
  * @file mqtt_agent_cbmc_state.h
- * @brief Allocation and assumption utilities for the MQTT Agent library CBMC proofs.
+ * @brief Allocation and assumption utilities for the MQTT Agent library CBMC
+ * proofs.
  */
 #ifndef MQTT_AGENT_CBMC_STATE_H_
 #define MQTT_AGENT_CBMC_STATE_H_
@@ -38,7 +40,7 @@
  *
  * @return NULL or allocated #MQTTFixedBuffer_t memory.
  */
-MQTTFixedBuffer_t * allocateMqttFixedBuffer( MQTTFixedBuffer_t * pFixedBuffer );
+MQTTFixedBuffer_t *allocateMqttFixedBuffer(MQTTFixedBuffer_t *pFixedBuffer);
 
 /**
  * @brief Validate a #MQTTFixedBuffer_t object.
@@ -50,7 +52,7 @@ MQTTFixedBuffer_t * allocateMqttFixedBuffer( MQTTFixedBuffer_t * pFixedBuffer );
  * @note A NULL object is a valid object. This is for coverage of the NULL
  * parameter checks in the function under proof.
  */
-bool isValidMqttFixedBuffer( const MQTTFixedBuffer_t * pFixedBuffer );
+bool isValidMqttFixedBuffer(const MQTTFixedBuffer_t *pFixedBuffer);
 
 /**
  * @brief Allocate a #MQTTAgentContext_t object.
@@ -59,7 +61,7 @@ bool isValidMqttFixedBuffer( const MQTTFixedBuffer_t * pFixedBuffer );
  *
  * @return NULL or allocated #MQTTAgentContext_t memory.
  */
-MQTTAgentContext_t * allocateMqttAgentContext( MQTTAgentContext_t * pContext );
+MQTTAgentContext_t *allocateMqttAgentContext(MQTTAgentContext_t *pContext);
 
 /**
  * @brief Validate a #MQTTAgentContext_t object.
@@ -71,7 +73,7 @@ MQTTAgentContext_t * allocateMqttAgentContext( MQTTAgentContext_t * pContext );
  * @note A NULL object is a valid object. This is for coverage of the NULL
  * parameter checks in the function under proof.
  */
-bool isValidMqttAgentContext( const MQTTAgentContext_t * pContext );
+bool isValidMqttAgentContext(const MQTTAgentContext_t *pContext);
 
 /**
  * @brief Function to check if the status is a valid status for the MQTT Agent
@@ -90,7 +92,7 @@ bool isValidMqttAgentContext( const MQTTAgentContext_t * pContext );
  *
  * @return true if an MQTTAgent_Connect status, false otherwise.
  */
-bool isAgentSendCommandFunctionStatus( MQTTStatus_t mqttStatus );
+bool isAgentSendCommandFunctionStatus(MQTTStatus_t mqttStatus);
 
 /**
  * @brief Allocate a #MQTTAgentConnectArgs_t object.
@@ -99,14 +101,15 @@ bool isAgentSendCommandFunctionStatus( MQTTStatus_t mqttStatus );
  *
  * @return NULL or allocated #MQTTAgentConnectArgs_t memory.
  */
-MQTTAgentConnectArgs_t * allocateConnectArgs( MQTTAgentConnectArgs_t * pConnectArgs );
+MQTTAgentConnectArgs_t *
+allocateConnectArgs(MQTTAgentConnectArgs_t *pConnectArgs);
 
 /**
  * @brief Add Pending ACKs to the MQTTAgentContext.
  *
  * @param[in] pContext #MQTTAgentContext_t object to add ACKs.
  */
-void addPendingAcks( MQTTAgentContext_t * pContext );
+void addPendingAcks(MQTTAgentContext_t *pContext);
 
 /**
  * @brief Allocate a #MQTTAgentSubscribeArgs_t object.
@@ -115,6 +118,7 @@ void addPendingAcks( MQTTAgentContext_t * pContext );
  *
  * @return NULL or allocated #MQTTAgentSubscribeArgs_t memory.
  */
-MQTTAgentSubscribeArgs_t * allocateSubscribeArgs( MQTTAgentSubscribeArgs_t * pSubscribeArgs );
+MQTTAgentSubscribeArgs_t *
+allocateSubscribeArgs(MQTTAgentSubscribeArgs_t *pSubscribeArgs);
 
 #endif /* ifndef MQTT_AGENT_CBMC_STATE_H_ */
