@@ -15,6 +15,11 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: recursive
+
+      - name: Perform Recursive Clone
+        shell: bash
+        run: git submodule update --checkout --init --recursive
+
       - name: Build
         run: |
           sudo apt-get install -y lcov
@@ -38,7 +43,8 @@ jobs:
       - name: Check Coverage
         uses: Skptak/CI-CD-Github-Actions/coverage-cop@main
         with:
-          path: ./build/coverage.info
+          coverage-file: ./build/coverage.info
+
   complexity:
     runs-on: ubuntu-latest
     steps:
@@ -116,6 +122,27 @@ jobs:
         uses: Skptak/CI-CD-Github-Actions/link-verifier@main
         with:
           path: ./
+
+  verify-manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      # At time of writing the gitmodules are set not to pull
+      # Even when using fetch submodules. Need to run this command
+      # To force it to grab them.
+      - name: Perform Recursive Clone
+        shell: bash
+        run: git submodule update --checkout --init --recursive
+
+      - name: Run manifest verifier
+        uses: FreeRTOS/CI-CD-GitHub-Actions/manifest-verifier@CI-CD-Overhaul
+        with:
+          path: ./
+          fail-on-incorrect-version: true
 
   proof_ci:
     if: ${{ github.event.pull_request }}
